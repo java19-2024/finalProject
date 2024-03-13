@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "app.reducing.size",
+  "type": "java.lang.String",
+  "description": "A description for 'app.reducing.size'"
+}]}
