@@ -47,7 +47,7 @@ class EmailDataProviderControllerTest {
 	@Test
 	void testDataNotExists() throws  Exception {
 		when(dataProvider.getEmailData(SENSOR_ID_NOT_EXIST))
-		.thenThrow(new IllegalAccessException(ERROR_MESSAGE));
+		.thenThrow(new IllegalArgumentException(ERROR_MESSAGE));
 		
 		String res = mockMvc.perform(get("http://localhost:8080/email/data/"+SENSOR_ID_NOT_EXIST))
 				.andDo(print()).andExpect(status().isNotFound())
