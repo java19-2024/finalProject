@@ -85,5 +85,6 @@
 
 	<modules>
 		<module>avg-reducer</module>
+		<module>email-provider</module>
 	</modules>
 </project>
