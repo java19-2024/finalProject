@@ -13,8 +13,8 @@ import telran.microservices.probes.service.IDataProvider;
 @Sql(scripts="db-test-script.sql")
 public class EmailDataProviderServiceTest {
 
-	private static final long SENSOR_ID_EXIST = 10000;
-	private static final long SENSOR_ID_NOT_EXIST = 10001;
+	private static final long SENSOR_ID_EXIST = 100000;
+	private static final long SENSOR_ID_NOT_EXIST = 100001;
 	private static final String ERROR_MESSAGE = "no person for sensor id="+SENSOR_ID_NOT_EXIST;
 	@Autowired
 	IDataProvider service;
@@ -23,7 +23,11 @@ public class EmailDataProviderServiceTest {
 	void emailDataExistTest() {
 	EmailData exp = new EmailData(new String[] {"vasya@mail.ru", "sara@gmail.com"},
 			new String[] {"Vasya", "Sara"});
-	assertEquals(exp,  service.getEmailData(SENSOR_ID_EXIST));
+
+	EmailData actual = service.getEmailData(SENSOR_ID_EXIST);
+	System.out.println(actual);
+	assertArrayEquals(exp.emails(), actual.emails());
+	assertArrayEquals(exp.names(), actual.names());
 }
 	@Test
 	void emailDataNotExistTest() {

@@ -1,8 +1,7 @@
-delete from sensors;
 delete from persons;
+delete from sensors;
 insert into sensors(id, purpose, min_value, max_value)
-values(10000, 'sensor', 100, 200);
+values(100000, 'oxygen_sensor', 100, 200);
 insert into persons(id, email, name, sensor_id)
-values(123L, 'vasya@mail.ru', 'Vasya', 10000);
---insert into persons(id, email, name, sensor_id)
---values(124L, 'sara@gmail.com', 'Sara', 10000);
+values (123, 'vasya@mail.ru', 'Vasya', 100000),
+(124, 'sara@gmail.com', 'Sara', 100000);
