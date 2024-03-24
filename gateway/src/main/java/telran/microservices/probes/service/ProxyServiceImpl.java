@@ -12,11 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 public class ProxyServiceImpl implements IProxyService {
-	@Value("#${app.routed.urls}")
+	@Value("#{${app.routed.urls}}")
 	Map<String, String> urlsMap;
-	//email:'http://email-data-provider:8080
+	//email:'http://email-data-provider:8080'
 	@Override
 	public ResponseEntity<byte[]> proxyRouting(ProxyExchange<byte[]> proxy, HttpServletRequest request) {
 		

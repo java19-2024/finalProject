@@ -9,6 +9,7 @@ import telran.microservices.probes.dto.EmailData;
 import telran.microservices.probes.entities.Person;
 import telran.microservices.probes.repo.PersonRepo;
 import telran.microservices.probes.repo.SensorRepo;
+import telran.spring.exceptions.NotFoundException;
 @Service
 public class DataProviderImpl implements IDataProvider {
 @Autowired
@@ -20,7 +21,7 @@ PersonRepo personRepo;
 	public EmailData getEmailData(long sensorId) {
 		List<Person> pers = personRepo.findBySensorId(sensorId);
 		if(pers.isEmpty())
-			throw new IllegalArgumentException("no person for sensor id="+sensorId);
+			throw new NotFoundException("no person for sensor id="+sensorId);
 		String[] emails = pers.stream().map(p -> p.getEmail()).toArray(String[] :: new);
 		String[] names = pers.stream().map(p -> p.getName()).toArray(String[] :: new);
 		return new EmailData(emails, names);

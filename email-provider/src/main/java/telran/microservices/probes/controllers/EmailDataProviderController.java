@@ -16,14 +16,7 @@ public class EmailDataProviderController {
 	IDataProvider service;
 	
 	@GetMapping("email/data/{id}")
-	ResponseEntity<?> getEmailData(@PathVariable long id) {
-		ResponseEntity<?> res = null;
-		try {
-			EmailData data = service.getEmailData(id);
-			res = new ResponseEntity<EmailData>(data, HttpStatus.OK);
-		} catch (Exception e) {
-			res = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-		}
-		return res;
+	EmailData  getEmailData(@PathVariable long id) {
+		return service.getEmailData(id);
 	}
 }

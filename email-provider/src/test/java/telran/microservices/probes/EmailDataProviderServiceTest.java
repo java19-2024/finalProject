@@ -8,6 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import telran.microservices.probes.dto.EmailData;
 import telran.microservices.probes.service.IDataProvider;
+import telran.spring.exceptions.NotFoundException;
 
 @SpringBootTest
 @Sql(scripts="db-test-script.sql")
@@ -31,7 +32,7 @@ public class EmailDataProviderServiceTest {
 }
 	@Test
 	void emailDataNotExistTest() {
-		assertThrowsExactly(IllegalArgumentException.class, () ->
+		assertThrowsExactly(NotFoundException.class, () ->
 		service.getEmailData(SENSOR_ID_NOT_EXIST), ERROR_MESSAGE);
 	}
 }
