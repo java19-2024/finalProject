@@ -79,8 +79,8 @@ public class AvgReducerTest {
 				return  invocation.getArgument(0);
 			}		
 		});
-		producer.send(new GenericMessage<Probe>(probeNoValues), consumerBindingName);
-		Message<byte[]>message = consumer.receive(0, producerBindingName);
+		producer.send(new GenericMessage<Probe>(probeNoValues));
+		Message<byte[]>message = consumer.receive(0);
 		assertNull(message);
 		assertEquals(VALUE, redisMap.get(ID_PROBE_NO_VALUES).getValues().get(0));
 	}
@@ -99,8 +99,8 @@ public class AvgReducerTest {
 				return  invocation.getArgument(0);
 			}		
 		});
-		producer.send(new GenericMessage<Probe>(probeNoAvg), consumerBindingName);
-		Message<byte[]>message = consumer.receive(0, producerBindingName);
+		producer.send(new GenericMessage<Probe>(probeNoAvg));
+		Message<byte[]>message = consumer.receive(0);
 		assertNull(message);
 		assertEquals(VALUE, redisMap.get(ID_PROBE_NO_AVG).getValues().get(0));
 	}
@@ -119,11 +119,10 @@ public class AvgReducerTest {
 				return  invocation.getArgument(0);
 			}		
 		});
-		producer.send(new GenericMessage<Probe>(probeAvg), consumerBindingName);
-		Message<byte[]>message = consumer.receive(0, producerBindingName);
+		producer.send(new GenericMessage<Probe>(probeAvg));
+		Message<byte[]>message = consumer.receive(0);
 		assertNotNull(message);
-		ObjectMapper mapper = new ObjectMapper();
-		assertEquals(probeAvg, mapper.readValue(message.getPayload(), Probe.class));
+		ObjectMapper mapper = new ObjectMapper();		assertEquals(probeAvg, mapper.readValue(message.getPayload(), Probe.class));
 		assertTrue(redisMap.get(ID_PROBE_AVG).getValues().isEmpty());
 	}
 }

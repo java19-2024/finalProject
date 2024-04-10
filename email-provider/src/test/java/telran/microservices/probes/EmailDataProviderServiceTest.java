@@ -33,6 +33,7 @@ public class EmailDataProviderServiceTest {
 	@Test
 	void emailDataNotExistTest() {
 		assertThrowsExactly(NotFoundException.class, () ->
+		//assertThrowsExactly(IllegalArgumentException.class, () ->
 		service.getEmailData(SENSOR_ID_NOT_EXIST), ERROR_MESSAGE);
 	}
 }

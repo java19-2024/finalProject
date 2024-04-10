@@ -1,0 +1,25 @@
+version: "3"
+services:
+    config-server:
+        image: config-server
+    
+    gateway:
+        image: gateway
+        ports:
+            - 9292:9292
+
+    email-provider:
+        image: email-provider
+        environment:
+            - MYSQL_HOST=db
+        depends_on:
+            - db
+        
+    db:
+        image: mysql:innovation
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=java19
+        ports:
+            - "3306:3306"              
+                            
