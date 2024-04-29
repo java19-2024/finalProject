@@ -9,16 +9,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 
+import lombok.extern.slf4j.Slf4j;
 import trelran.microservices.probes.dto.Probe;
 import trelran.microservices.probes.service.IAvgReducer;
-
+@Slf4j
 @SpringBootApplication
 public class AvgReducerAppl {
 	@Autowired
 	IAvgReducer service;
 	@Autowired
 	StreamBridge sb;
-	@Value("${app.avg.producer.binding.name:avgProducer-out-0}")
+	@Value("${app.avg.producer.binding.name:avgdata-out-0}")
 	String bindingName;
 
 	public static void main(String[] args) {
@@ -28,10 +29,13 @@ public class AvgReducerAppl {
 	@Bean
 	Consumer<Probe> avgConsumer(){
 		return (probe) -> {
+			log.info("Probe was RECIVED {}", probe);
 			Integer avgValue = service.avgReduce(probe);
+			log.info("Service return AVG {}", avgValue);
 			if(avgValue != null) {
 				Probe avgProbe = new Probe(probe.id(), avgValue);
 				sb.send(bindingName, avgProbe);
+				log.info("AVG SENDED to Kafka {}", avgProbe );
 			}
 		};
 	}

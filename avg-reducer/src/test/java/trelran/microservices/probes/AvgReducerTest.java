@@ -48,7 +48,7 @@ public class AvgReducerTest {
 	Probe probeNoAvg = new Probe(ID_PROBE_NO_AVG, VALUE);
 	Probe probeAvg = new Probe(ID_PROBE_AVG, VALUE);
 	private String consumerBindingName = "avgConsumer-in-0";
-	private String producerBindingName = "avgProducer-out-0";
+	private String producerBindingName = "avgdata-out-0";
 	//==entities for Redis============
 	static ListProbeValues listProbesNoAvg = new ListProbeValues(ID_PROBE_NO_AVG);
 	static ListProbeValues listProbesAvg = new ListProbeValues(ID_PROBE_AVG);
